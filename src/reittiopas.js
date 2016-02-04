@@ -24,7 +24,12 @@ const REPLACE_TABLE = {
 
 };
 
-
+/**
+ * Checks if 2 dates are the same day
+ * @param  Date date1
+ * @param  Date date2
+ * @return boolean
+ */
 function matchDate(date1, date2) {
 	return date1.getFullYear() === date2.getFullYear() &&
 	date1.getMonth() === date2.getMonth() &&
@@ -32,6 +37,12 @@ function matchDate(date1, date2) {
 
 }
 
+/**
+ * Checks if 2 dates are the same day & same time
+ * @param  Date date1
+ * @param  Date date2
+ * @return boolean
+ */
 function matchDateAndTime(date1, date2) {
 	return matchDate(date1, date2) &&
 	date1.getHours() === date2.getHours() &&
@@ -82,6 +93,7 @@ function getRealDepartureTime(trainObj) {
 		delete train.cancelled;
 		delete train.differenceInMinutes;
 		delete train.found;
+		delete train.delayed;
 		delete train.actualTime;
 
 		return train;
@@ -133,14 +145,9 @@ function getRealDepartureTime(trainObj) {
 					let scheduleTime = new Date(stationTime.scheduledTime);
 					let actualTime = new Date(stationTime.liveEstimateTime);
 
-
 					if (stationTime.type === 'DEPARTURE' &&
 					stationTime.stationShortCode === train.shortCode &&
 					matchDateAndTime(scheduleTime, train.departDate)) {
-						if (isNaN(actualTime.getTime()) && stationTime.differenceInMinutes > 0) {
-							console.log(stationTime.liveEstimateTime);
-							return;
-						}
 						train.found = true;
 						train.cancelled = stationTime.cancelled || stationTrain.cancelled;
 						if (stationTime.differenceInMinutes &&
@@ -172,7 +179,7 @@ function getRealDepartureTime(trainObj) {
 					train.differenceInMinutes * 60 * 1000);
 
 				train.departTimeObj.text(
-					('+') + train.differenceInMinutes.toString() + 'min ' +
+					'+' + train.differenceInMinutes.toString() + 'min ' +
 					dateToTime(actualTime)
 				)
 				.css({
