@@ -1,0 +1,27 @@
+{
+  "name": "reittiopas_enhanced",
+  "version": "0.1.1",
+  "description": "Simple plugin that queries for digitraffic.fi for train delays and adds the info to reittiopas.fi.",
+  "main": "reittiopas.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "reittiopas",
+    "digitraffic",
+    "open",
+    "data"
+  ],
+  "author": "Risto \"Dilaz\" Viitanen",
+  "license": "MIT",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-jshint": "^2.0.0",
+    "jquery": "^2.2.0",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0",
+    "q": "^1.4.1",
+    "yargs": "^3.32.0"
+  }
+}

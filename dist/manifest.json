@@ -1,0 +1,23 @@
+{
+	"manifest_version": 2,
+
+	"name": "Reittiopas Enhanced",
+	"short_name": "Reittiopas Enhanced",
+	"description": "Parantaa reittiopas.fi toiminnallisuutta lisäämällä tiedon myöhässä olevista junista.",
+	"version": "0.1.1",
+	"icons": { "128": "icon.png" },
+	"content_scripts": [
+		{
+			"matches": ["http://www.reittiopas.fi/*", "https://www.reittiopas.fi/*"],
+			"js": [
+				"reittiopas.js"
+			]
+		}
+	],
+
+	"permissions": [
+		"tabs",
+		"http://www.reittiopas.fi/*",
+		"https://www.reittiopas.fi/*"
+	]
+}
