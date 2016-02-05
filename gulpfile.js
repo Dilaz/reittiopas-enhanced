@@ -1,6 +1,9 @@
 var gulp = require('gulp');
+var gulpIf = require('gulp-if');
 var jshint = require('gulp-jshint');
+var uglify = require('gulp-uglify');
 var browserify = require('gulp-browserify');
+var babel = require('gulp-babel');
 
 var argv = require('yargs').argv;
 
@@ -15,10 +18,14 @@ gulp.task('lint', function() {
 
 gulp.task('js', function() {
 	gulp.src('src/reittiopas.js')
+	.pipe(babel({
+		presets: ['es2015'],
+	}))
 	.pipe(browserify({
 		insertGlobals: true,
 		debug: !argv.production
 	}))
+	.pipe(gulpIf(argv.production, uglify()))
 	.pipe(gulp.dest('dist/'));
 });
 
